@@ -84,6 +84,14 @@
 	z-index: 2;
 }
 
+.routes-map-para b{
+	text-transform: uppercase;
+	color: #9c5e18;
+	font-family: open sans bold;
+	line-height: 1.2;
+	font-size: 20px;
+}
+
 .routes-map-container-m{
 	/*750 : 1334*/
 	width: 100vw;
