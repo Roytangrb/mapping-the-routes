@@ -35,6 +35,14 @@ const Basics = function(){}
         $("#dropdownctn").classList.toggle("show")
       }
 
+      }
+
+      Basics.init = (isDesktop) => {
+
+        if (isDesktop){
+          //return all controllers
+          return [Basics.lightbox()]
+        }
 
       }
 

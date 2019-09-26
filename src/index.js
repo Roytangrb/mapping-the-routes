@@ -15,10 +15,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	Hash.initHashController()
 
-	Basics.lightbox()
 
 	var ctrls_prev = RoutesCtrl.init(isDesktopPrev)
 	var nav_prev = Navbar.init(isDesktopPrev)
+		var basics_prev = Basics.init(isDesktopPrev)
 
 	//window resize:
 	window.onresize = function(){
@@ -31,8 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	    //switch routes ctrl
 	    ctrls_prev.forEach(ctrl=>{ ctrl.destroy(true) }) //destroy ctrls, reset scenes
-			nav_prev.forEach(ctrl=>{ nav.destroy(true) }) //destroy ctrls, reset scenes
+			nav_prev.forEach(ctrl=>{ nav.destroy(true) })
+			basics_prev.forEach(ctrl=>{ basics.destroy(true) })
 			RoutesCtrl.init(isDesktop)
+			Navbar.init(isDesktop)
+			Basics.init(isDesktop)
 	  }
 	  //reset audio ctrl
 	  audioCtrl.destroy(true)
