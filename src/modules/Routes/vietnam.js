@@ -5,11 +5,24 @@ import 'animation.gsap'
 import 'debug.addIndicators'
 
 const $ = q => document.querySelector(q)
+const MOBILE = 'assets/maps/Vietnam/mobile/'
 
-const Vietnam = {}
+const Vietnam = {
+	maps: [
+    $('#vietnam-routes-1'),
+	],
+  pics_m: [
+    `${MOBILE}m-map-01.jpg`,
+    `${MOBILE}m-map-02.jpg`,
+		`${MOBILE}m-map-03.jpg`,
+  ],
+  maps_m: [
+    $('#vietnam-routes-m-1'),
+  ]
+}
 
 Vietnam.MapCtrl = ()=>{
-	var map = $('#vietnam-routes-1'),
+	var map = Vietnam.maps[0],
       visiable_opt = {opacity: 1, ease:Linear.easeNone},
       hidden_opt = {opacity: 0, ease:Linear.easeNone}
 
@@ -18,7 +31,7 @@ Vietnam.MapCtrl = ()=>{
   var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
 
   var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '300%', offset: (-navOffset), reverse: true})
-    .on('start', function(){
+    .on('enter', function(){
       this.setPin(this.triggerElement(), {pushFollowers: true})
     })
     .addTo(controller)
@@ -71,7 +84,7 @@ Vietnam.MapCtrl = ()=>{
 
   var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2*duration_per-navOffset), reverse: true})
     .on('start', (e) => {
-    	switchByDirD(e, map, 'assets/maps/Vietnam/desktop/map-01.jpg', 'assets/maps/Vietnam/desktop/map-02.jpg') 
+    	switchByDirD(e, map, 'assets/maps/Vietnam/desktop/map-01.jpg', 'assets/maps/Vietnam/desktop/map-02.jpg')
     })
     .addTo(controller);
 
@@ -85,11 +98,22 @@ Vietnam.MapCtrlM = () => {
 
   var navOffset = ($('.nav').offsetHeight + $('#progress-div').offsetHeight) || 0
 
-  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '100%', offset: (-navOffset), reverse: true})
+  var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '300%', offset: (-navOffset), reverse: true})
     .on('start', function(){
       this.setPin(this.triggerElement(), {pushFollowers: false})
     })
     .addTo(controller)
+
+		var duration_per = pin_scene.duration() / 3
+  //first scene trigger inmediately on map pin, use onLeave triggerHook
+
+	var second_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (duration_per-navOffset), reverse: true})
+	.on('start', (e) => { switchByDir(e, map, Vietnam.pics_m[0], Vietnam.pics_m[1]) })
+	.addTo(controller);
+
+  var thrid_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: duration_per, offset: (2*duration_per-navOffset), reverse: true})
+    .on('start', (e) => { switchByDir(e, map, Vietnam.pics_m[1], Vietnam.pics_m[2]) })
+    .addTo(controller);
 
   return controller
 }
@@ -105,6 +129,20 @@ function switchByDirD(e, $map, src_old, src){
       changeBgD($map, src)
     } else {
       changeBgD($map, src_old)
+    }
+}
+
+function changeBg($map, src){
+  //used only on mobile
+	$map.querySelector('.routes-map-bg-m').src = src
+}
+
+function switchByDir(e, $map, src_old, src){
+  var isForward = e.scrollDirection == 'FORWARD' ? true : false
+    if (isForward){
+      changeBg($map, src)
+    } else {
+      changeBg($map, src_old)
     }
 }
 
