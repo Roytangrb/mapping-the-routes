@@ -243,4 +243,21 @@
 			margin-top: 5px;
 	}
 
+	.partner-logo
+	{
+	  padding: 0;
+	}
+
+	.partner-logo .top-logo
+	{
+	  margin: 1vh 0.5vw;
+	  width: 13%;
+	}
+
+	.partner-logo .bottom-logo
+	{
+	  margin: 1vh 0.3vw;
+	  width: 11%;
+	}
+
 }
