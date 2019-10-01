@@ -54,6 +54,8 @@ Navbar.countryController = () => {
                           country[i].classList.remove("active")
 											})
 	})
+
+  return controller
 }
 
 

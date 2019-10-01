@@ -3,62 +3,64 @@ const $$ = q => document.querySelectorAll(q)
 const Basics = function(){}
 
 
-  Basics.lightbox = ()=>{
+Basics.lightbox = ()=>{
+	const image = $$('.modal-image')
+  const modal = $$('.modal')
+  const modalImg = $$('.modal-content')
 
-    	const image = $$('.modal-image')
-      const modal = $$('.modal')
-      const modalImg = $$('.modal-content')
+  const handler = function(evt){
+    modal[i].style.display = "block";
+    modalImg[i].src = evt.target.src;
 
-    	image.forEach((image, i)=> {
-        image.onclick = function(){
-          modal[i].style.display = "block";
-          modalImg[i].src = this.src;
-
-          var span = document.getElementsByClassName("close")[i];
-          span.onclick = function() {
-            modal[i].style.display = "none";
-          }
-        }
-    	})
-
+    var span = document.getElementsByClassName("close")[i];
+    span.onclick = function() {
+      modal[i].style.display = "none";
     }
+  }
+
+	image.forEach( (target, i) => {
+    target.addEventListener('click', handler)
+	})
+
+  return () => {
+    image.forEach( target => {
+      target.removeEventListener('click', handler)
+    })
+  }
+}
 
 
-    Basics.dropdown = ()=>{
+Basics.dropdown = (isDesktop)=>{
+  const handler = event => {
+    $("#dropdownctn").classList.toggle("show")
+  }
 
-      //add listener for click
-      $("#dropbtn").addEventListener('click', handler)
-      //add listener for touch
-      $("#dropbtn").addEventListener('touchend', handler)
+  $("#dropbtn").addEventListener(isDesktop ? 'click' : 'touchend', handler)
 
-      const handler = event => {
-        $("#dropdownctn").classList.toggle("show")
-      }
+  return () => {
+    $("#dropbtn").removeEventListener(isDesktop ? 'click' : 'touchend', handler)
+  }
+}
 
-      }
+Basics.burgermenu = ()=>{
+  const handler = event => {
+    $(".country-list").classList.toggle('show') 
+  }
 
-      Basics.burgermenu = ()=>{
+  $("#burgerbtn").addEventListener('touchend', handler)
 
-        //add listener for click
-        $("#burgerbtn").addEventListener('click', handler)
-        //add listener for touch
-        $("#burgerbtn").addEventListener('touchend', handler)
+  return () => {
+    $("#burgerbtn").removeEventListener('touchend', handler)
+  }
+}
 
-        const handler = event => {
-          $(".country-list").classList.toggle("show")
-        }
+Basics.init = (isDesktop) => {
+  //return handlers
+  if (isDesktop){
+    return [Basics.lightbox(), Basics.dropdown(isDesktop)]
+  }else {
+    return [Basics.burgermenu(), Basics.dropdown(isDesktop)]
+  }
+}
 
-        }
-
-      Basics.init = (isDesktop) => {
-
-        if (isDesktop){
-          //return all controllers
-          return [Basics.lightbox(),Basics.dropdown()]
-        }else {
-          return [Basics.burgermenu(),Basics.dropdown()]
-        }
-
-      }
-
-  export default Basics
+export default Basics

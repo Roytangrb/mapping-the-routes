@@ -204,6 +204,7 @@ p
 
 .country-list
 {
+  display: none;
   position: absolute;
   height: 100vh;
   width: 100vw;
@@ -673,5 +674,5 @@ text-transform: uppercase;
 
 .show
 {
-  display: block;
+  display: block !important;
 }

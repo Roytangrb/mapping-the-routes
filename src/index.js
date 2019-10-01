@@ -11,15 +11,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	var audioCtrl = ProgressBar.ctrlHeaderAudio()
 	var progressCtrl = ProgressBar.initScrollController()
+	
 	ProgressBar.initClickNav()
-
 	Hash.initHashController()
-
 
 	var ctrls_prev = RoutesCtrl.init(isDesktopPrev)
 	var nav_prev = Navbar.init(isDesktopPrev)
-		var basics_prev = Basics.init(isDesktopPrev)
-
+	var listener_clear_fns = Basics.init(isDesktopPrev)
+	
 	//window resize:
 	window.onresize = function(){
 	  var isDesktop = window.matchMedia("(min-device-width: 480px)").matches
@@ -31,11 +30,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	    //switch routes ctrl
 	    ctrls_prev.forEach(ctrl=>{ ctrl.destroy(true) }) //destroy ctrls, reset scenes
-			nav_prev.forEach(ctrl=>{ nav.destroy(true) })
-			basics_prev.forEach(ctrl=>{ basics.destroy(true) })
-			RoutesCtrl.init(isDesktop)
-			Navbar.init(isDesktop)
-			Basics.init(isDesktop)
+			nav_prev.forEach(ctrl=>{ ctrl.destroy(true) })
+			listener_clear_fns.forEach(fn=>{ fn() })
+			ctrls_prev = RoutesCtrl.init(isDesktop)
+			nav_prev = Navbar.init(isDesktop)
+			listener_clear_fns = Basics.init(isDesktopPrev)
 	  }
 	  //reset audio ctrl
 	  audioCtrl.destroy(true)
