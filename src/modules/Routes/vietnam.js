@@ -32,7 +32,7 @@ Vietnam.MapCtrl = ()=>{
 
   var pin_scene = new ScrollMagic.Scene({ triggerElement: map, triggerHook:'onLeave', duration: '300%', offset: (-navOffset), reverse: true})
     .on('enter', function(){
-      this.setPin(this.triggerElement(), {pushFollowers: true})
+      this.setPin(this.triggerElement(), {pushFollowers: false})
     })
     .addTo(controller)
 
