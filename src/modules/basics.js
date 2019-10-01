@@ -37,11 +37,26 @@ const Basics = function(){}
 
       }
 
+      Basics.burgermenu = ()=>{
+
+        //add listener for click
+        $("#burgerbtn").addEventListener('click', handler)
+        //add listener for touch
+        $("#burgerbtn").addEventListener('touchend', handler)
+
+        const handler = event => {
+          $(".country-list").classList.toggle("show")
+        }
+
+        }
+
       Basics.init = (isDesktop) => {
 
         if (isDesktop){
           //return all controllers
-          return [Basics.lightbox()]
+          return [Basics.lightbox(),Basics.dropdown()]
+        }else {
+          return [Basics.burgermenu(),Basics.dropdown()]
         }
 
       }
