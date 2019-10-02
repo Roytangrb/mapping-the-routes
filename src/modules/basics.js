@@ -31,6 +31,9 @@ Basics.lightbox = ()=>{
 
 
 Basics.dropdown = (isDesktop)=>{
+
+		$("#dropdownctn").classList.remove("show");
+
   const handler = event => {
     $("#dropdownctn").classList.toggle("show")
   }
@@ -43,15 +46,30 @@ Basics.dropdown = (isDesktop)=>{
 }
 
 Basics.burgermenu = ()=>{
+
   const handler = event => {
-    $(".country-list").classList.toggle('show') 
+    $(".country-list").classList.toggle('show')
+		console.log("handler");
   }
 
-  $("#burgerbtn").addEventListener('touchend', handler)
+		  $("#burgerbtn").addEventListener('touchend', handler)
 
-  return () => {
-    $("#burgerbtn").removeEventListener('touchend', handler)
-  }
+		  return () => {
+		    $("#burgerbtn").removeEventListener('touchend', handler)
+		  }
+
+
+  // if (!event.target.matches('#burgerbtn')) {
+  //   var dropdowns = document.getElementsByClassName("country-list");
+  //   var i;
+  //   for (i = 0; i < dropdowns.length; i++) {
+  //     var openDropdown = dropdowns[i];
+  //     if (openDropdown.classList.contains('show')) {
+  //       openDropdown.classList.remove('show');
+  //     }
+  //   }
+  // }
+
 }
 
 Basics.init = (isDesktop) => {
