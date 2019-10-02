@@ -49,17 +49,22 @@ Basics.burgermenu = ()=>{
 
   const handler = event => {
     $(".country-list").classList.toggle('show')
-		console.log("handler");
   }
 
 		  $("#burgerbtn").addEventListener('touchend', handler)
+
+			const country = $$(".country-item")
+
+			country.forEach( e => {
+
+		    e.addEventListener('touchend', handler)
+			})
 
 		  return () => {
 		    $("#burgerbtn").removeEventListener('touchend', handler)
 		  }
 
-
-  // if (!event.target.matches('#burgerbtn')) {
+	// if (!event.target.matches('#burgerbtn')) {
   //   var dropdowns = document.getElementsByClassName("country-list");
   //   var i;
   //   for (i = 0; i < dropdowns.length; i++) {

@@ -62,9 +62,8 @@ Navbar.countryController = () => {
 Navbar.titleChangeM = ()=>{
   var title = $('.serif')
   var name = $('.white')
-  var nav = $('.country-list')
   var appear = {opacity: 1, ease:Linear.easeNone}
-
+  name.style.display = 'block'
   var controller = new ScrollMagic.Controller();
   // build scene
   var scene = new ScrollMagic.Scene({triggerElement: $('.header'), triggerHook: 'onLeave', duration: $('.header').offsetHeight})
@@ -88,7 +87,7 @@ Navbar.titleChangeM = ()=>{
 }
 
 Navbar.init = (isDesktop) => {
-  
+
   if (isDesktop){
     //return all controllers
     return [Navbar.titleChangeD(), Navbar.countryController()]
