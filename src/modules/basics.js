@@ -82,7 +82,7 @@ Basics.init = (isDesktop) => {
   if (isDesktop){
     return [Basics.lightbox(), Basics.dropdown(isDesktop)]
   }else {
-    return [Basics.burgermenu(), Basics.dropdown(isDesktop)]
+    return [Basics.dropdown(isDesktop)]
   }
 }
 
