@@ -57,7 +57,7 @@ Basics.burgermenu = ()=>{
 
 			country.forEach( e => {
 
-		    e.addEventListener('touchend', handler)
+		    e.addEventListener('click', handler)
 			})
 
 		  return () => {
