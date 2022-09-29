@@ -41,7 +41,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "d3": "^5.11.0",
+    "d3": "^7.6.1",
     "gsap": "^2.0.2",
     "scrollmagic": "^2.0.6"
   },
